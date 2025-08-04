@@ -5,6 +5,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.Optional;
 import java.util.Properties;
 
 
@@ -18,6 +19,8 @@ public class HibernateUtil {
             Dotenv dotenv = Dotenv.load();
             configuration.setProperty("hibernate.connection.username", dotenv.get("DB_USERNAME"));
             configuration.setProperty("hibernate.connection.url", dotenv.get("DB_URL"));
+            configuration.setProperty("hibernate.connection.password",
+                    Optional.ofNullable(dotenv.get("DB_PASSWORD")).orElse(""));
             return configuration.buildSessionFactory();
         } catch (HibernateException e) {
             throw new RuntimeException(e);
