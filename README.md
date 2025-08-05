@@ -3,6 +3,8 @@
 2. Create keys
 ```
 DB_USERNAME=
-DB_PASSWORD
+DB_PASSWORD=
 DB_URL=
 ```
+*  You don't have to specify **DB_PASSWORD** if you don't have a password
+* DB_URL - jdbc:postgresql://*host*:*port*/*database_name*
