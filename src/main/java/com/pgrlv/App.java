@@ -1,5 +1,8 @@
 package com.pgrlv;
 
+import com.pgrlv.dao.AuthorDao;
+import com.pgrlv.dao.BookDao;
+import com.pgrlv.dao.ReaderDao;
 import com.pgrlv.model.Author;
 import com.pgrlv.model.Book;
 import com.pgrlv.model.Reader;
@@ -15,7 +18,11 @@ public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Session session = HibernateUtil.getSessionFactory().openSession();
-        LibraryService libraryService = new LibraryService(session);
+
+        AuthorDao authorDao = new AuthorDao(session);
+        BookDao bookDao = new BookDao(session);
+        ReaderDao readerDao = new ReaderDao(session);
+        LibraryService libraryService = new LibraryService(authorDao, bookDao, readerDao);
 
         String menuText = """
                 Выберите действие:

@@ -15,6 +15,12 @@ public class BookDao implements Dao<Book>{
         this.session = session;
     }
 
+    /**
+     Methods 'take' and 'returnOne' works only with methods, that have transactions
+     So, if you want use method 'take', you need use 'save' method after 'take'
+
+     Example: method 'returnBook' in LibraryService
+     */
     public boolean take(Book book){
         Integer count = book.getCount();
         if (count <= 0){

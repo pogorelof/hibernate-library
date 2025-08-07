@@ -6,21 +6,19 @@ import com.pgrlv.dao.ReaderDao;
 import com.pgrlv.model.Author;
 import com.pgrlv.model.Book;
 import com.pgrlv.model.Reader;
-import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LibraryService {
 
-    private Session session;
-    private AuthorDao authorDao;
-    private BookDao bookDao;
-    private ReaderDao readerDao;
-    public LibraryService(Session session){
-        this.session = session;
-        authorDao = new AuthorDao(session);
-        bookDao = new BookDao(session);
-        readerDao = new ReaderDao(session);
+    private final AuthorDao authorDao;
+    private final BookDao bookDao;
+    private final ReaderDao readerDao;
+    public LibraryService(AuthorDao authorDao, BookDao bookDao, ReaderDao readerDao){
+        this.authorDao = authorDao;
+        this.bookDao = bookDao;
+        this.readerDao = readerDao;
     }
 
     public void addAuthor(String name){
@@ -49,6 +47,7 @@ public class LibraryService {
     public void addReader(String name){
         Reader reader = new Reader();
         reader.setName(name);
+        reader.setBooks(new ArrayList<>());
         readerDao.save(reader);
     }
 
