@@ -1,9 +1,11 @@
 package com.pgrlv.dao;
 
 import com.pgrlv.model.Book;
+import com.pgrlv.model.Reader;
 import com.pgrlv.util.HibernateUtil;
 import org.hibernate.Session;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class BookDao implements Dao<Book>{
@@ -24,6 +26,15 @@ public class BookDao implements Dao<Book>{
 
     public void returnOne(Book book){
         book.setCount(book.getCount() + 1);
+    }
+
+    public void deleteConnections(Book book){
+        List<Reader> readers = book.getReaders();
+        for (Reader reader : readers) {
+            reader.getBooks().remove(book);
+        }
+        readers.clear();
+        update(book);
     }
 
     @Override

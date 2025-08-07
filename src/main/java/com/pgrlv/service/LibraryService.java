@@ -37,6 +37,11 @@ public class LibraryService {
         bookDao.save(book);
     }
 
+    public void deleteBook(Book book){
+        bookDao.deleteConnections(book);
+        bookDao.delete(book);
+    }
+
     public List<Book> getAllBooks(){
         return bookDao.getAll();
     }

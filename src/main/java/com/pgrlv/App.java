@@ -129,6 +129,35 @@ public class App {
                     }
                     break;
                 }
+                case "7": {
+                    System.out.println("Введите правильное имя читателя: ");
+                    String readerName = scanner.nextLine();
+                    Reader reader = libraryService.getReader(readerName);
+                    List<Book> readerBooks = reader.getBooks();
+
+                    if (readerBooks.isEmpty()){
+                        System.out.println("У читателя нет активных книг");
+                        break;
+                    }
+
+                    System.out.println("Ваши книги:");
+                    for (int i = 0; i < readerBooks.size(); i++) {
+                        int index = i + 1;
+                        System.out.println(index + ". " + readerBooks.get(i).getTitle());
+                    }
+                    break;
+                }
+                case "8": {
+                    System.out.println("Книги:");
+                    List<Book> allBooks = libraryService.getAllBooks();
+                    for (int i = 0; i < allBooks.size(); i++) {
+                        int index = i + 1;
+                        System.out.println(index + ". " + allBooks.get(i).getTitle());
+                    }
+                    System.out.print("Выбор для удаления: ");
+                    int chooseBook = Integer.parseInt(scanner.nextLine()) - 1;
+                    libraryService.deleteBook(allBooks.get(chooseBook));
+                }
 
             }
 
