@@ -120,6 +120,14 @@ public class App {
                     int chooseBook = Integer.parseInt(scanner.nextLine()) - 1;
 
                     libraryService.returnBook(reader, readerBooks.get(chooseBook));
+                    break;
+                }
+                case "6": {
+                    List<Book> allBooks = libraryService.getAllBooks();
+                    for (Book book : allBooks) {
+                        System.out.println(book.getTitle() + " - " + book.getCount());
+                    }
+                    break;
                 }
 
             }
