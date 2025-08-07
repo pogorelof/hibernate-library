@@ -26,6 +26,12 @@ public class ReaderDao implements Dao<Reader>{
         session.getTransaction().commit();
     }
 
+    public void removeBook(Reader reader, Book book){
+        session.beginTransaction();
+        reader.getBooks().remove(book);
+        session.getTransaction().commit();
+    }
+
     @Override
     public Reader getById(Integer id) {
         return session.find(Reader.class, id);

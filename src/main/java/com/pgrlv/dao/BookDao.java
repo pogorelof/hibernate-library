@@ -22,6 +22,10 @@ public class BookDao implements Dao<Book>{
         return true;
     }
 
+    public void returnOne(Book book){
+        book.setCount(book.getCount() + 1);
+    }
+
     @Override
     public Book getById(Integer id) {
         return session.find(Book.class, id);

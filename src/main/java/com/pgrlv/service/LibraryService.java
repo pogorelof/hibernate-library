@@ -59,4 +59,9 @@ public class LibraryService {
         readerDao.addBook(reader, book);
         return true;
     }
+
+    public void returnBook(Reader reader, Book book){
+        bookDao.returnOne(book);
+        readerDao.removeBook(reader, book);
+    }
 }

@@ -100,6 +100,27 @@ public class App {
                     }
                     break;
                 }
+                case "5": {
+                    System.out.println("Введите правильное имя читателя: ");
+                    String readerName = scanner.nextLine();
+                    Reader reader = libraryService.getReader(readerName);
+                    List<Book> readerBooks = reader.getBooks();
+
+                    if (readerBooks.isEmpty()){
+                        System.out.println("У читателя нет активных книг");
+                        break;
+                    }
+
+                    System.out.println("Выберите книгу:");
+                    for (int i = 0; i < readerBooks.size(); i++) {
+                        int index = i + 1;
+                        System.out.println(index + ". " + readerBooks.get(i).getTitle());
+                    }
+                    System.out.print("Выбор: ");
+                    int chooseBook = Integer.parseInt(scanner.nextLine()) - 1;
+
+                    libraryService.returnBook(reader, readerBooks.get(chooseBook));
+                }
 
             }
 
