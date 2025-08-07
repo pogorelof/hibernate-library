@@ -42,9 +42,9 @@ public class App {
         while (run){
             System.out.println(menuText);
             System.out.print("Выбор: ");
-            String choose = scanner.nextLine();
+            String choice = scanner.nextLine();
 
-            switch (choose){
+            switch (choice){
                 case "0": {
                     run = false;
                     session.close();
