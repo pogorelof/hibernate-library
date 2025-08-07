@@ -40,6 +40,7 @@ public class App {
             switch (choose){
                 case "0": {
                     run = false;
+                    session.close();
                     break;
                 }
                 case "1": {
