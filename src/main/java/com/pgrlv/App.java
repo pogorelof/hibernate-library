@@ -89,7 +89,13 @@ public class App {
                 case "4": {
                     System.out.println("Введите правильное имя читателя: ");
                     String readerName = scanner.nextLine();
-                    Reader reader = libraryService.getReader(readerName);
+                    Reader reader = null;
+                    try {
+                        reader = libraryService.getReader(readerName);
+                    } catch (IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                        continue;
+                    }
 
                     System.out.println("Выберите книгу:");
                     List<Book> books = libraryService.getAllBooks();
@@ -110,7 +116,13 @@ public class App {
                 case "5": {
                     System.out.println("Введите правильное имя читателя: ");
                     String readerName = scanner.nextLine();
-                    Reader reader = libraryService.getReader(readerName);
+                    Reader reader = null;
+                    try {
+                        reader = libraryService.getReader(readerName);
+                    } catch (IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                        continue;
+                    }
                     List<Book> readerBooks = reader.getBooks();
 
                     if (readerBooks.isEmpty()){
@@ -139,7 +151,13 @@ public class App {
                 case "7": {
                     System.out.println("Введите правильное имя читателя: ");
                     String readerName = scanner.nextLine();
-                    Reader reader = libraryService.getReader(readerName);
+                    Reader reader = null;
+                    try {
+                        reader = libraryService.getReader(readerName);
+                    } catch (IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                        continue;
+                    }
                     List<Book> readerBooks = reader.getBooks();
 
                     if (readerBooks.isEmpty()){
@@ -168,7 +186,13 @@ public class App {
                 case "9": {
                     System.out.println("Введите правильное имя читателя: ");
                     String readerName = scanner.nextLine();
-                    Reader reader = libraryService.getReader(readerName);
+                    Reader reader = null;
+                    try {
+                        reader = libraryService.getReader(readerName);
+                    } catch (IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                        continue;
+                    }
 
                     libraryService.deleteReader(reader);
                 }

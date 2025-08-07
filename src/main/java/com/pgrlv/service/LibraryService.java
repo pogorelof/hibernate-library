@@ -52,7 +52,11 @@ public class LibraryService {
     }
 
     public Reader getReader(String name){
-        return readerDao.getByName(name);
+        Reader reader = readerDao.getByName(name);
+        if (reader == null){
+            throw new IllegalArgumentException("Читатель не найден: " + name);
+        }
+        return reader;
     }
 
     public void deleteReader(Reader reader){
