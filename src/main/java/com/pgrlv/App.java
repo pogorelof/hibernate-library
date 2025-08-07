@@ -48,6 +48,7 @@ public class App {
                 case "0": {
                     run = false;
                     session.close();
+                    scanner.close();
                     break;
                 }
                 case "1": {
@@ -182,6 +183,7 @@ public class App {
                     System.out.print("Выбор для удаления: ");
                     int chooseBook = Integer.parseInt(scanner.nextLine()) - 1;
                     libraryService.deleteBook(allBooks.get(chooseBook));
+                    break;
                 }
                 case "9": {
                     System.out.println("Введите правильное имя читателя: ");
@@ -195,8 +197,11 @@ public class App {
                     }
 
                     libraryService.deleteReader(reader);
+                    break;
                 }
-
+                default: {
+                    System.out.println("Такого выбора нет!");
+                }
             }
 
         }
