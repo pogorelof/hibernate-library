@@ -74,7 +74,7 @@ public class App {
                     break;
                 }
                 case "3": {
-                    System.out.print("Введите имя автора: ");
+                    System.out.print("Введите имя читателя: ");
                     String name = scanner.nextLine();
                     libraryService.addReader(name);
                     break;
@@ -157,6 +157,13 @@ public class App {
                     System.out.print("Выбор для удаления: ");
                     int chooseBook = Integer.parseInt(scanner.nextLine()) - 1;
                     libraryService.deleteBook(allBooks.get(chooseBook));
+                }
+                case "9": {
+                    System.out.println("Введите правильное имя читателя: ");
+                    String readerName = scanner.nextLine();
+                    Reader reader = libraryService.getReader(readerName);
+
+                    libraryService.deleteReader(reader);
                 }
 
             }

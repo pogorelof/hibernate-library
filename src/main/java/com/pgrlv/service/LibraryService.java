@@ -56,10 +56,25 @@ public class LibraryService {
         return readerDao.getByName(name);
     }
 
+    public void deleteReader(Reader reader){
+        List<Book> books = reader.getBooks();
+        for (Book book : books) {
+            bookDao.returnOne(book);
+        }
+        readerDao.delete(reader);
+    }
+
     public boolean checkOutBook(Reader reader, Book book){
-        if (book.getCount() <= 0 || reader.getBooks().contains(book)){
+        if (book.getCount() <= 0){
             return false;
         }
+
+        if (reader.getBooks() != null){
+            if (reader.getBooks().contains(book)){
+                return false;
+            }
+        }
+
         bookDao.take(book);
         readerDao.addBook(reader, book);
         return true;
