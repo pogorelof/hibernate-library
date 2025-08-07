@@ -2,6 +2,7 @@ package com.pgrlv;
 
 import com.pgrlv.model.Author;
 import com.pgrlv.model.Book;
+import com.pgrlv.model.Reader;
 import com.pgrlv.service.LibraryService;
 import com.pgrlv.util.HibernateUtil;
 import org.hibernate.Session;
@@ -37,15 +38,17 @@ public class App {
             String choose = scanner.nextLine();
 
             switch (choose){
-                case "0":
+                case "0": {
                     run = false;
                     break;
-                case "1":
+                }
+                case "1": {
                     System.out.print("Введите имя автора: ");
                     String name = scanner.nextLine();
                     libraryService.addAuthor(name);
                     break;
-                case "2":
+                }
+                case "2": {
                     System.out.println("Введите название книги: ");
                     String title = scanner.nextLine();
 
@@ -67,6 +70,36 @@ public class App {
                     book.setAuthor(authors.get(chooseAuthor));
 
                     libraryService.addBook(book);
+                    break;
+                }
+                case "3": {
+                    System.out.print("Введите имя автора: ");
+                    String name = scanner.nextLine();
+                    libraryService.addReader(name);
+                    break;
+                }
+                case "4": {
+                    System.out.println("Введите правильное имя читателя: ");
+                    String readerName = scanner.nextLine();
+                    Reader reader = libraryService.getReader(readerName);
+
+                    System.out.println("Выберите книгу:");
+                    List<Book> books = libraryService.getAllBooks();
+                    for (int i = 0; i < books.size(); i++) {
+                        int index = i + 1;
+                        System.out.println(index + ". " + books.get(i).getTitle());
+                    }
+                    System.out.print("Выбор: ");
+                    int chooseBook = Integer.parseInt(scanner.nextLine()) - 1;
+
+                    if (libraryService.checkOutBook(reader, books.get(chooseBook))){
+                        System.out.println("Успешно!");
+                    } else{
+                        System.out.println("Ошибка");
+                    }
+                    break;
+                }
+
             }
 
         }

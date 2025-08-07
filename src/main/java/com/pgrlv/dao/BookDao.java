@@ -13,6 +13,15 @@ public class BookDao implements Dao<Book>{
         this.session = session;
     }
 
+    public boolean take(Book book){
+        Integer count = book.getCount();
+        if (count <= 0){
+            return false;
+        }
+        book.setCount(count - 1);
+        return true;
+    }
+
     @Override
     public Book getById(Integer id) {
         return session.find(Book.class, id);

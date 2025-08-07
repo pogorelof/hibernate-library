@@ -1,5 +1,6 @@
 package com.pgrlv.dao;
 
+import com.pgrlv.model.Book;
 import com.pgrlv.model.Reader;
 import org.hibernate.Session;
 
@@ -10,6 +11,19 @@ public class ReaderDao implements Dao<Reader>{
     private Session session;
     public ReaderDao(Session session){
         this.session = session;
+    }
+
+    public Reader getByName(String name){
+        String hql = "FROM Reader WHERE name = :name";
+        return session.createQuery(hql, Reader.class)
+                .setParameter("name", name)
+                .uniqueResult();
+    }
+
+    public void addBook(Reader reader, Book book){
+        session.beginTransaction();
+        reader.getBooks().add(book);
+        session.getTransaction().commit();
     }
 
     @Override
